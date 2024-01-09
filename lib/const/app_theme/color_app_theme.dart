@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ColorAppTheme {
+  static Color transparentColor = Colors.transparent;
   static Color blueColor = Colors.blue;
   static Color greyShade400 = Colors.grey.shade400;
   static Color greyShade700 = Colors.grey.shade700;
