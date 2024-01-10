@@ -8,6 +8,9 @@ import 'package:news_app_api/services/utils/utils.dart';
 
 import '../widgets/custom_tabs.dart';
 import '../widgets/custom_text.dart';
+import '../widgets/horizontal_spacing.dart';
+import '../widgets/pagination_widget.dart';
+import '../widgets/vertical_spacing.dart';
 
 class HomeNewsScreen extends StatefulWidget {
   const HomeNewsScreen({Key? key}) : super(key: key);
@@ -18,6 +21,7 @@ class HomeNewsScreen extends StatefulWidget {
 
 class _HomeNewsScreenState extends State<HomeNewsScreen> {
   var newsType = NewsType.allNews;
+  int currentPageIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -44,9 +48,8 @@ class _HomeNewsScreenState extends State<HomeNewsScreen> {
         ),
         drawer: const DrawerWidget(),
         body: Column(children: [
-          const SizedBox(
-            height: 5,
-          ),
+          const VerticalSpacing(5),
+
           //? Taps (all news , top trending)
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -65,9 +68,7 @@ class _HomeNewsScreenState extends State<HomeNewsScreen> {
                     : ColorAppTheme.transparentColor,
                 fontSize: newsType == NewsType.allNews ? 20 : 16,
               ),
-              const SizedBox(
-                width: 25,
-              ),
+              const HorizontalSpacing(25),
               CustomTabs(
                 text: 'Top Trending',
                 function: () {
@@ -86,11 +87,90 @@ class _HomeNewsScreenState extends State<HomeNewsScreen> {
               ),
             ],
           ),
+          const VerticalSpacing(10),
+          //? pagination numbers
+          newsType == NewsType.topTrending
+              ? Container()
+              : SizedBox(
+                  //? to avoid overflow error
+                  height: kBottomNavigationBarHeight,
+                  child: Row(
+                    children: [
+                      PaginationWidget(
+                        text: 'Prev',
+                        function: () {
+                          setState(() {
+                            if (currentPageIndex == 0) {
+                              currentPageIndex = 0;
+                            } else if (currentPageIndex >= 0) {
+                              currentPageIndex -= 1;
+                            } else {}
+                          });
+                        },
+                        roundedRectangleBorder: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(15),
+                            bottomRight: Radius.circular(5),
+                          ),
+                        ),
+                      ),
+                      const Spacer(),
+                      Flexible(
+                        flex: 12,
+                        child: ListView.separated(
+                            physics: const BouncingScrollPhysics(),
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) {
+                              return InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    currentPageIndex = index;
+                                  });
+                                  print("$currentPageIndex");
+                                },
+                                child: CircleAvatar(
+                                    backgroundColor: currentPageIndex == index
+                                        ? ColorAppTheme.darkIconsColor
+                                        : Theme.of(context).cardColor,
+                                    child: CustomText(
+                                      text: "${index + 1}",
+                                      textStyle: GoogleFonts.aBeeZee(
+                                          fontWeight: FontWeight.w900),
+                                    )),
+                              );
+                            },
+                            separatorBuilder: (context, index) =>
+                                const HorizontalSpacing(5),
+                            itemCount: 5),
+                      ),
+                      const Spacer(),
+                      PaginationWidget(
+                        roundedRectangleBorder: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(15),
+                            bottomLeft: Radius.circular(5),
+                          ),
+                        ),
+                        text: 'Next',
+                        function: () {
+                          if (currentPageIndex == 4) {
+                            return;
+                          }
+                          setState(() {
+                            currentPageIndex += 1;
+                          });
+                          print("$currentPageIndex");
+                        },
+                      ),
+                    ],
+                  ),
+                )
         ]),
       ),
     );
   }
 }
+
 /*
 or :
   CustomTabs(

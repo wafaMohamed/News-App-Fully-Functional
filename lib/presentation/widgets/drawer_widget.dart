@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:google_fonts/google_fonts.dart';
-// import 'package:gap/gap.dart';
 import 'package:news_app_api/const/app_assets/app_assets.dart';
 import 'package:news_app_api/presentation/widgets/vertical_spacing.dart';
 import 'package:provider/provider.dart';
@@ -66,7 +65,9 @@ class _DrawerWidgetState extends State<DrawerWidget> {
               thickness: 3,
             ),
             SwitchListTile(
-              title: themeState.darkTheme ? const Text('Dark') : Text('Light'),
+              title: themeState.darkTheme
+                  ? CustomText(text: 'Dark')
+                  : CustomText(text: 'Light'),
               secondary: themeState.darkTheme
                   ? const Icon(Icons.dark_mode)
                   : const Icon(Icons.light_mode),
