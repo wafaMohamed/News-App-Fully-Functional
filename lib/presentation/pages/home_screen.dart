@@ -169,18 +169,30 @@ class _HomeNewsScreenState extends State<HomeNewsScreen> {
                       ],
                     ),
                   ),
-            CustomDropdownButton(
-                value: sortBy,
-                items: [
-                  SortByEnums.relevancy.name,
-                  SortByEnums.publishedAt.name,
-                  SortByEnums.popularity.name,
-                ],
-                onChanged: (String? value) {
-                  setState(() {
-                    sortBy = value!;
-                  });
-                }),
+            const VerticalSpacing(10),
+            newsType == NewsType.topTrending
+                ? Container()
+                : Align(
+                    alignment: Alignment.topRight,
+                    child: Material(
+                      color: Theme.of(context).cardColor,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: CustomDropdownButton(
+                            value: sortBy,
+                            items: [
+                              SortByEnums.relevancy.name,
+                              SortByEnums.publishedAt.name,
+                              SortByEnums.popularity.name,
+                            ],
+                            onChanged: (String? value) {
+                              setState(() {
+                                sortBy = value!;
+                              });
+                            }),
+                      ),
+                    ),
+                  ),
           ],
         ),
       ),
