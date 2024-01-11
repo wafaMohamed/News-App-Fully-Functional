@@ -6,11 +6,11 @@ import 'package:news_app_api/const/enums/vars.dart';
 import 'package:news_app_api/presentation/widgets/drawer_widget.dart';
 import 'package:news_app_api/services/utils/utils.dart';
 
-import '../widgets/articles_widgets.dart';
 import '../widgets/custom_drop_down_button.dart';
 import '../widgets/custom_tabs.dart';
 import '../widgets/custom_text.dart';
 import '../widgets/horizontal_spacing.dart';
+import '../widgets/loading_article_widget.dart';
 import '../widgets/pagination_widget.dart';
 import '../widgets/vertical_spacing.dart';
 
@@ -195,13 +195,7 @@ class _HomeNewsScreenState extends State<HomeNewsScreen> {
                     ),
                   ),
             const VerticalSpacing(10),
-            Expanded(
-              child: ListView.builder(
-                  itemCount: 10,
-                  itemBuilder: (BuildContext ctx, int index) {
-                    return const ArticlesWidgets();
-                  }),
-            )
+            const LoadingArticlesWidgets()
           ],
         ),
       ),
