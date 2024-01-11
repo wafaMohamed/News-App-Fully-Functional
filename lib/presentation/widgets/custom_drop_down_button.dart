@@ -16,17 +16,22 @@ class CustomDropdownButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DropdownButton(
-      value: value,
-      items: items.map((String item) {
-        return DropdownMenuItem(
-          value: item,
-          child: CustomText(text: item),
-        );
-      }).toList(),
-      onChanged: (String? value) {
-        onChanged(value!);
-      },
+    return Material(
+      color: Theme.of(context).cardColor,
+      child: DropdownButton(
+        value: value,
+        items: items.map((String item) {
+          return DropdownMenuItem(
+            value: item,
+            child: CustomText(
+              text: item,
+            ),
+          );
+        }).toList(),
+        onChanged: (String? value) {
+          onChanged(value!);
+        },
+      ),
     );
   }
 }

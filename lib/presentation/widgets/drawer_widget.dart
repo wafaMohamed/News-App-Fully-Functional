@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:news_app_api/const/app_assets/app_assets.dart';
 import 'package:news_app_api/presentation/widgets/vertical_spacing.dart';
@@ -36,12 +37,18 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 children: [
                   // Flexible -> to avoid overfitting error in image
                   Flexible(
-                    child: Image.asset(
-                      AppAssets.newspaperAssets,
-                      width: 80,
-                      height: 80,
-                    ),
-                  ),
+                      child: SvgPicture.asset(
+                    AppAssets.newsBlueIconAssets,
+                    width: 80,
+                    height: 80,
+                    fit: BoxFit.fill,
+                  )
+                      // Image.asset(
+                      //   AppAssets.newspaperAssets,
+                      //   width: 80,
+                      //   height: 80,
+                      // ),
+                      ),
                   const VerticalSpacing(10),
                   CustomText(
                     text: 'News App',

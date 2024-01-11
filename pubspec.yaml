@@ -31,6 +31,7 @@ dependencies:
   flutter:
     sdk: flutter
   # UI
+  flutter_svg: ^1.1.6
   flutter_iconly: ^1.0.2
   google_fonts: ^6.1.0
   fancy_shimmer_image: ^2.0.3
