@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:news_app_api/const/app_theme/color_app_theme.dart';
 import 'package:news_app_api/presentation/widgets/custom_text.dart';
 import 'package:news_app_api/presentation/widgets/horizontal_spacing.dart';
+import 'package:news_app_api/presentation/widgets/vertical_spacing.dart';
 import 'package:news_app_api/services/utils/utils.dart';
 
 import '../../const/app_style/style.dart';
@@ -69,7 +70,28 @@ class ArticlesWidgets extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      CustomText(text: "text", textStyle: titleStyle),
+                      CustomText(
+                        text: "Title" * 50,
+                        textStyle: titleStyle,
+                        textAlign: TextAlign.justify,
+                        maxLines: 2,
+                      ),
+                      const VerticalSpacing(12),
+                      Align(
+                        alignment: Alignment.topRight,
+                        child: CustomText(
+                          text: "🕞 Reading Time",
+                          textStyle: titleStyle.copyWith(fontSize: 13),
+                        ),
+                      ),
+                      const VerticalSpacing(20),
+                      FittedBox(
+                        child: CustomText(
+                          maxLines: 1,
+                          text: "🔗 21-5-2021- on Monday",
+                          textStyle: titleStyle,
+                        ),
+                      ),
                     ],
                   ),
                 )
