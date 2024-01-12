@@ -1,3 +1,4 @@
+import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -29,6 +30,7 @@ class _HomeNewsScreenState extends State<HomeNewsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final size = Utils(context).getSizeOfScreen;
     Color color = Utils(context).getColor;
     return SafeArea(
       child: Scaffold(
@@ -197,7 +199,20 @@ class _HomeNewsScreenState extends State<HomeNewsScreen> {
                     ),
                   ),
             const VerticalSpacing(10),
-            if (newsType == NewsType.topTrending) const TopTrendingWidget(),
+            if (newsType == NewsType.topTrending)
+              SizedBox(
+                height: size.height * 0.50,
+                child: Swiper(
+                  autoplay: true,
+                  autoplayDelay: 8000,
+                  itemWidth: size.width * 0.9,
+                  layout: SwiperLayout.STACK,
+                  viewportFraction: 0.9,
+                  itemCount: 5,
+                  itemBuilder: (context, index) => const TopTrendingWidget(),
+                ),
+              ),
+
             if (newsType == NewsType.allNews)
               Expanded(
                 child: ListView.builder(
