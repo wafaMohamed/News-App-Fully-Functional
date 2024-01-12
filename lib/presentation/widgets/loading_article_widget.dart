@@ -26,6 +26,8 @@ class _LoadingArticlesWidgetsState extends State<LoadingArticlesWidgets> {
     Size size = Utils(context).getSizeOfScreen;
     return Expanded(
       child: ListView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
           itemCount: 10,
           itemBuilder: (BuildContext ctx, int index) {
             return ArticlesShimmerEffectWidget(
