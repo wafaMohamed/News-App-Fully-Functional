@@ -5,7 +5,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:news_app_api/const/app_theme/color_app_theme.dart';
 import 'package:news_app_api/const/enums/vars.dart';
 import 'package:news_app_api/presentation/widgets/drawer_widget.dart';
-import 'package:news_app_api/presentation/widgets/top_trending_widget.dart';
 import 'package:news_app_api/services/utils/utils.dart';
 
 import '../widgets/articles_widgets.dart';
@@ -14,6 +13,7 @@ import '../widgets/custom_tabs.dart';
 import '../widgets/custom_text.dart';
 import '../widgets/horizontal_spacing.dart';
 import '../widgets/pagination_widget.dart';
+import '../widgets/top_trending_widget.dart';
 import '../widgets/vertical_spacing.dart';
 
 class HomeNewsScreen extends StatefulWidget {
@@ -200,8 +200,9 @@ class _HomeNewsScreenState extends State<HomeNewsScreen> {
                   ),
             const VerticalSpacing(10),
             if (newsType == NewsType.topTrending)
+              //const LoadingSwiperWidgets(),
               SizedBox(
-                height: size.height * 0.50,
+                height: size.height * 0.48,
                 child: Swiper(
                   autoplay: true,
                   autoplayDelay: 8000,
@@ -214,13 +215,13 @@ class _HomeNewsScreenState extends State<HomeNewsScreen> {
               ),
 
             if (newsType == NewsType.allNews)
+              //LoadingArticlesWidgets
               Expanded(
                 child: ListView.builder(
                   shrinkWrap: true,
                   itemCount: 10,
                   itemBuilder: (BuildContext ctx, int index) {
                     return const ArticlesWidgets();
-                    //ArticlesWidgets();
                   },
                 ),
               ),
